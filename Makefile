@@ -8,18 +8,13 @@ MOCHA_FLAGS = \
 BROWSERIFY_FLAGS = \
 	--transform lib/index.js
 
-test: \
-	test-pre \
-	test-main \
-	test-post
-
-test-pre:
+build:
 	$(BROWSERIFY) $(BROWSERIFY_FLAGS) \
 		opt/test/index.js > opt/test/build.js
 
-test-main:
+test: build
 	$(MOCHA_PHANTOMJS) $(MOCHA_FLAGS) \
 		opt/test/index.html
 
-test-post:
+clean:
 	@rm opt/test/build.js
