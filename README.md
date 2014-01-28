@@ -25,11 +25,16 @@ browserify({ entries: ['app.js'] })
 Then require your templates through:
 
 ```
+var swig = require('swig');
+
 var template = require('./food.html');
 
-document.querySelector('#food').innerHTML = template({
-  users: ['apple', 'orange', 'banana']
+var html = swig.render(template.template, {
+  locals: { users: ['apple', 'orange', 'banana'] },
+  filename: template.filename
 });
+
+document.querySelector('#food').innerHTML = html;
 ```
 
 ## License
