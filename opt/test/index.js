@@ -2,7 +2,8 @@ var chai = require('chai');
 var swig = require('swig');
 var path = require('path');
 
-var simple = require('./templates/simple.html');
+var simple  = require('./templates/simple.html');
+var include = require('./templates/include.html');
 
 describe('swigify', function() {
 
@@ -18,6 +19,14 @@ describe('swigify', function() {
   it('should render simple template', function() {
     var result = swig.render(simple, {
       filename: './templates/simple.html'
+    });
+
+    chai.expect(result).to.contain('<h1>Hello World!</h1>');
+  });
+
+  it('should render include template', function() {
+    var result = swig.render(include, {
+      filename: './templates/include.html'
     });
 
     chai.expect(result).to.contain('<h1>Hello World!</h1>');
