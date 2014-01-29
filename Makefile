@@ -6,7 +6,8 @@ MOCHA_FLAGS = \
 	--reporter spec
 
 BROWSERIFY_FLAGS = \
-	--transform lib/index.js
+	--transform lib/index.js \
+	--debug
 
 build:
 	$(BROWSERIFY) $(BROWSERIFY_FLAGS) \

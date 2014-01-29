@@ -2,44 +2,55 @@ var chai = require('chai');
 var swig = require('swig');
 var path = require('path');
 
-var simple  = require('./templates/simple.html');
-var include = require('./templates/include.html');
+var simple  = require('../views/simple/hello.html');
+var extend  = require('../views/extends/child.html');
+var include = require('../views/include/parent.html');
 
 describe('swigify', function() {
 
   before(function() {
     swig.setDefaults({
       loader: {
-        resolve: resolve,
-        load: load
+        resolve: function(target, source) {
+          var dirname = path.dirname(source);
+
+          return path.join(dirname, target);
+        },
+        load: function(target) {
+          if (target.indexOf('.')) {
+            target = './' + target;
+          }
+          return require(target);
+        }
       }
     });
   });
 
   it('should render simple template', function() {
     var result = swig.render(simple, {
-      filename: './templates/simple.html'
+      filename: '../views/simple/hello.html'
     });
 
     chai.expect(result).to.contain('<h1>Hello World!</h1>');
   });
 
-  it('should render include template', function() {
+  it('should render included template', function() {
     var result = swig.render(include, {
-      filename: './templates/include.html'
+      filename: '../views/include/parent.html',
+      locals: { name: 'Bodo' }
     });
 
-    chai.expect(result).to.contain('<h1>Hello World!</h1>');
+    chai.expect(result).to.contain('<p>Bodo</p>');
+  });
+
+  it('should render child with extended parent', function() {
+    var result = swig.render(extend, {
+      filename: '../views/extends/child.html'
+    });
+
+    chai.expect(result).to.contain('<body>');
+    chai.expect(result).to.contain('<img src="foobar.jpeg" />');
+    chai.expect(result).to.contain('</body>');
   });
 
 });
-
-function resolve(target, source) {
-  var dirname = path.dirname(source);
-
-  return path.join(dirname, target);
-}
-
-function load(target) {
-  return require('./' + target);
-}
