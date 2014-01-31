@@ -16,3 +16,6 @@ Thumbs.db
 
 # packages
 node_modules
+
+# builds
+opt/test/build.js
