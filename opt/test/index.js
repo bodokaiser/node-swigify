@@ -35,6 +35,10 @@ describe('swigify', function() {
   });
 
   it('should render included template', function() {
+    var name = '../views/include/child.html';
+
+    console.log(require(name));
+
     var result = swig.render(include, {
       filename: '../views/include/parent.html',
       locals: { name: 'Bodo' }
@@ -43,7 +47,7 @@ describe('swigify', function() {
     chai.expect(result).to.contain('<p>Bodo</p>');
   });
 
-  it('should render child with extended parent', function() {
+  xit('should render child with extended parent', function() {
     var result = swig.render(extend, {
       filename: '../views/extends/child.html'
     });

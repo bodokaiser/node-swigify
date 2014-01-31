@@ -1,8 +1,7 @@
 # swigify
 
-[browserify](https://github.com/substack/browserify) transform which will
-precompile [swig](https://github.com/paularmstrong/swig) templates with support
-of template inheritance.
+[browserify](https://github.com/substack/browserify) transform for swig
+templates.
 
 ## Installation
 
@@ -29,13 +28,15 @@ var swig = require('swig');
 
 var template = require('./food.html');
 
-var html = swig.render(template.template, {
-  locals: { users: ['apple', 'orange', 'banana'] },
-  filename: template.filename
+var html = swig.render(template, {
+  locals: { users: ['apple', 'orange', 'banana'] }
 });
 
 document.querySelector('#food').innerHTML = html;
 ```
+
+**Note:** Support for `extends`, `include` and `import` is currently not
+available. But I am working on it.
 
 ## License
 
