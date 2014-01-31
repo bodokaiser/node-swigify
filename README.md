@@ -18,6 +18,10 @@ var swigify = require('swigify');
 
 // default options which are used:
 var options = {
+  // uses html-minifier to compress template
+  // you can pass an object if you want to
+  // use own custom settings
+  compress: true,
   tagnames: ['import', 'include', 'extends'],
   newVarControls: ['<$', '$>'],
   newTagControls: ['<$', '$>'],

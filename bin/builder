@@ -7,6 +7,6 @@ var options = {
   debug: true, entries: ['./opt/test/index.js']
 };
 
-browserify(options).transform(swigify())
+browserify(options).transform(swigify({ compress: true }))
   .bundle().on('error', function(e) { console.log(e) })
   .pipe(process.stdout);

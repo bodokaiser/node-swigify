@@ -19,15 +19,13 @@ describe('swigify', function() {
       locals: { name: 'Bodo' }
     });
 
-    chai.expect(result).to.contain('<p>Bodo</p>');
+    chai.expect(result).to.contain('<div id="parent"><p>Bodo</p></div>');
   });
 
   xit('should render child with extended parent', function() {
     var result = swig.render(extend);
 
-    chai.expect(result).to.contain('<body>');
-    chai.expect(result).to.contain('<img src="foobar.jpeg" />');
-    chai.expect(result).to.contain('</body>');
+    chai.expect(result).to.contain('<body><img src="foobar.jpeg" /></body>');
   });
 
 });
