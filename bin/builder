@@ -8,5 +8,5 @@ var options = {
 };
 
 browserify(options).transform(swigify({ compress: true }))
-  .bundle().on('error', function(e) { console.log(e) })
+  .bundle().on('error', function(e) { throw e; })
   .pipe(process.stdout);

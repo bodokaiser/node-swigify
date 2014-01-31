@@ -46,7 +46,7 @@ var html = swig.render(template, {
 document.querySelector('#food').innerHTML = html;
 ```
 
-**Note:** Support for `extends`, `include` and `import` is currently not
+**Note:** Support for `extends` and `import` is currently not
 available. But I am working on it.
 
 ## License
