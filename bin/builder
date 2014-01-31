@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+
+var swigify    = require('../lib');
+var browserify = require('browserify');
+
+var options = {
+  debug: true, entries: ['./opt/test/index.js']
+};
+
+browserify(options).transform(swigify())
+  .bundle().on('error', function(e) { console.log(e) })
+  .pipe(process.stdout);

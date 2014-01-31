@@ -16,9 +16,16 @@ Just pass swigify to the `transform` method of your browserify instance.
 ```
 var swigify = require('swigify');
 
+// default options which are used:
+var options = {
+  tagnames: ['import', 'include', 'extends'],
+  newVarControls: ['<$', '$>'],
+  newTagControls: ['<$', '$>'],
+  oldTagControls: ['{%', '%}']
+};
+
 browserify({ entries: ['app.js'] })
-  .transform(swigify).bundle()
-  .pipe(yourWriteStream);
+  .transform(swigify(options)).bundle().pipe(yourWriteStream);
 ```
 
 Then require your templates through:
